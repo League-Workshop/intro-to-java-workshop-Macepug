@@ -23,6 +23,10 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 	final int frameHeight = 600;
 
 	ScaryMaze() throws Exception {
+		maze = ImageIO.read(getClass().getResource("Scary Maze.png"));
+		new Robot().mouseMove(70,105);
+		addMouseMotionListener(this);
+		
 		//1. Use this online tool to make a maze image and drop it into your section5 package: http://pixlr.com/editor/
 		//maze = ImageIO.read(getClass().getResource("standardMaze.jpg"));
 		//2. Change the line of code above so that it matches your maze's file name
@@ -40,6 +44,16 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		int mouseColor = maze.getRGB(mouseX, mouseY);
+		System.out.println(mouseColor);
+		int background = -16777216;
+		int end = -2227200;
+		if(mouseColor == background) {
+			scare();
+		}
+		if(mouseColor == end) {
+			JOptionPane.showMessageDialog(null, ("Congratulations, you won...:/"));
+		}
+			
 		//5. Print the mouseColor variable 
 		
 		//6.  Run your program and put your mouse over the background to find out what color it is
@@ -61,7 +75,9 @@ public class ScaryMaze extends JPanel implements Runnable, MouseMotionListener {
 		//9. Find a scary sound and put it in the section5 package where you put your maze picture. You can find a sound on freesound.org. Log in as leagueofamazing/code4life.
 		
 		//10. Use the code below to load your sound.  Change the file name to match the name of your sound file.  
-		//AudioClip sound = JApplet.newAudioClip(getClass().getResource("standardScarySound.wav"));
+		AudioClip sound = JApplet.newAudioClip(getClass().getResource("ScarySound.wav"));
+		sound.play();
+		showScaryImage("ScaryPhoto.jpg");
 		
 		//11. Play the scary sound. Hint: type "sound" and then a period.		
 		
